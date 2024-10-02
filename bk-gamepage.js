@@ -1,8 +1,9 @@
 // ==UserScript==
-// @name         哔咔download
+// @name         哔咔download - 清空页面并美观显示下载链接（固定宽度，动态标题）
 // @namespace    http://tampermonkey.net/
-// @version      2.15
-// @description  提取直链下载链接，清空页面内容并美观地显示出来.
+// @version      2.16
+// @description  提取 __NUXT_DATA__ 中的直链下载链接，清空页面内容并美观地显示出来，链接边框固定宽度，标题动态设置为网页标题。
+// @author       You
 // @match        https://game.storyend.net/*
 // @grant        none
 // @run-at       document-start
@@ -57,9 +58,12 @@
                 document.body.style.fontFamily = 'Arial, sans-serif';
                 document.body.style.padding = '20px';
 
+                // 动态获取并设置页面标题
+                const pageTitle = document.title || '下载链接';
+
                 // 创建标题
                 const title = document.createElement('h1');
-                title.innerText = '下载链接';
+                title.innerText = pageTitle;  // 使用网页的标题
                 title.style.color = '#333';
                 title.style.marginBottom = '20px';
                 title.style.fontSize = '24px';
